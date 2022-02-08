@@ -8,14 +8,14 @@
 1. INTRODUCTION
 2. INSTALLATION OF TOOLS
 3. CIRCUIT DESIGN
-   3.1 REFERENCE CIRCUIT DIAGRAM
-   3.2 REFERENCE CIRCUIT WAVEFORM
+   1. REFERENCE CIRCUIT DIAGRAM
+   2. REFERENCE CIRCUIT WAVEFORM
 5. IMPLEMENTATION
 6. REFERENCE
 
 ### 1. INTRODUCTION
 ***
-In this project, I am going to Design and Implement FULL ADDER using CMOS Technology and I will also implement it using sky130nm technology. Design and Implementation will be done using esim and ngspice software. Full Adder is the digital circuit which will add 3 inputs and give 2 outputs. 3 inputs are A, B, C and outputs are SUM, CARRY. Full Adder will do binary addition of A, B and C and will give the sum of 3 inputs at SUM output and carry bit at CARRY output.We can verify the output using Circuit Waveforms. This complete design and implementation is done using VLSI technology which has features such as high speed, low power, low cost, and small size.
+In this project, I am going to Design and Implement **FULL ADDER** using **CMOS** Technology and I will also implement it using sky130nm technology. Design and Implementation will be done using esim and ngspice software. Full Adder is the digital circuit which will add 3 inputs and give 2 outputs. 3 inputs are A, B, C and outputs are SUM, CARRY. Full Adder will do binary addition of A, B and C and will give the sum of 3 inputs at SUM output and carry bit at CARRY output.We can verify the output using Circuit Waveforms. This complete design and implementation is done using VLSI technology which has features such as high speed, low power, low cost, and small size.
 
 ### 2. INSTALLATION OF TOOLS
 ***
@@ -52,7 +52,7 @@ Follow these steps for Sky130 download and implementaion:
 1. Replace with CMOSP, mos\_p with sky130\_fd\_pr\_pfet\_01v8 and CMOSN, mos\_n with  sky130\_fd\_pr\_nfet\_01v8.
 1. To replace inductor, capacitor, resistor do it this way, for Ex: L1 out gnd 1m by x1 out gnd mid 0 sky130\_fd\_pr\_\_ind\_03\_90.
 
-Note: For more details go to the cells folder in sky\_fd\_pr. 
+**Note**: For more details go to the cells folder in sky\_fd\_pr. 
 
 Open the specific component folder which you want to use. 
 
@@ -74,15 +74,13 @@ To Run the ckt using ngspice:
 
 ### 3. CIRCUIT DESIGN
 ***
-Full Adder is a digital circuit which will add 3 binary inputs and will give 2 outputs namely SUM and CARRY. The 3 inputs are A, B and C and outputs are SUM and CARRY. As we have 3 inputs we will have 8 input combinations.Using circuit design rules of CMOS we will design the circuit in such a way that addition of 3 inputs will occur at SUM output and carry bit will occur at CARRY output. While designing we have used total 28 Transistors. Full Adder using CMOS will be designed using 2 parts: PMOS (pull-up lattice) and NMOS (pull-down lattice). PMOS circuit is connected to supply voltage VDD and NMOS circuit is connected to ground GND. We will implement this circuit design using sky130nm technology. In the Circuit Waveform, we will verify the above implementation using clock pulse. In the output we will give different input combinations through clock pulse and verify the logic using output waveform.  
+**Full Adder** is a digital circuit which will add 3 binary inputs and will give 2 outputs namely SUM and CARRY. The 3 inputs are **A**, **B** and **C** and outputs are **SUM** and **CARRY**. As we have 3 inputs we will have 8 input combinations.Using circuit design rules of CMOS we will design the circuit in such a way that addition of 3 inputs will occur at SUM output and carry bit will occur at CARRY output. While designing we have used total 28 Transistors. Full Adder using CMOS will be designed using 2 parts: PMOS (pull-up lattice) and NMOS (pull-down lattice). PMOS circuit is connected to supply voltage VDD and NMOS circuit is connected to ground GND. We will implement this circuit design using sky130nm technology. In the Circuit Waveform, we will verify the above implementation using clock pulse. In the output we will give different input combinations through clock pulse and verify the logic using output waveform.  
 
 #### 3.1 REFERENCE CIRCUIT DIAGRAM
-  ![REFERENCE CIRCUIT DIAGRAM](https://user-images.githubusercontent.com/70748543/152938593-034524ca-efd2-4550-96eb-f239ebc2a60a.jpeg)
-
+ ![REFERENCE CIRCUIT DIAGRAM](https://user-images.githubusercontent.com/70748543/153016545-9eca42e3-a254-4818-99a4-39dbcf2b68fb.JPG)
 
 #### 3.2 REFERENCE CIRCUIT WAVEFORM
-  ![REFERENCE CIRCUIT WAVEFORM](https://user-images.githubusercontent.com/70748543/152938719-4420d2a2-4b09-42e3-ac8e-5bccb35bf5a2.jpeg)
-  
+  ![REFERENCE CIRCUIT WAVEFORM](https://user-images.githubusercontent.com/70748543/153016656-df479e54-79e6-4a44-ba70-74592c8729ff.JPG)
 
 ### 4. IMPLEMENTATION
 ***
@@ -249,7 +247,7 @@ plot V(carry) V(sum) +4 V(vin_c) +8  V(vin_b) +12 V(vin_a)+15
 
 **Truth Table for 2:1 mux using CMOS is as shown below**:
 
-![TRUTH TABLE](https://user-images.githubusercontent.com/70748543/152938910-755d5a2e-acea-48ff-bd91-b33b99528575.jpeg)
+![TRUTH TABLE](https://user-images.githubusercontent.com/70748543/153016747-748084fa-245e-4885-a1bd-6e74ccbbd64d.JPG)
 
 Now, run the .cir.out file using ngspice and we will get the circuit waveforms as follows:
 ![Final_Circuit_Waveform](https://user-images.githubusercontent.com/70748543/152938841-1d850fcf-14c9-4f08-96b1-8ddc50119328.JPG)
