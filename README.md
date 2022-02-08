@@ -1,6 +1,6 @@
 # DESIGN AND IMPLEMENTATION OF FULL ADDER USING CMOS AND SKY130nm PDK
 
-- The purpose of this project is to design a CMOS FULL ADDER using an Opensource EDA Tool called eSim, an Opensource Spice Simulator called ngspice and Sky130 PDK.
+- The purpose of this project is to design a CMOS FULL ADDER using an Opensource EDA Tool called **eSim**, an Opensource Spice Simulator called **ngspice** and **Sky130 PDK**.
 - To explore the project, you can git clone using the command:
 
 ## Table of Contents:
@@ -15,7 +15,7 @@
 
 ### 1. INTRODUCTION
 ***
-In this project, I am going to Design and Implement 2:1 Mux using CMOS Technology and I will also implement it using sky130nm technology. Design and Implementation will be done using esim and ngspice software. MUX is a data selector which will give single output from several data inputs. Here we have implemented 2 input MUX which will give single output based on select line input. We can verify the output using Circuit Waveforms. This complete design and implementation is done using VLSI technology which has features such as high speed, low power, low cost, and small size.
+In this project, I am going to Design and Implement FULL ADDER using CMOS Technology and I will also implement it using sky130nm technology. Design and Implementation will be done using esim and ngspice software. Full Adder is the digital circuit which will add 3 inputs and give 2 outputs. 3 inputs are A, B, C and outputs are SUM, CARRY. Full Adder will do binary addition of A, B and C and will give the sum of 3 inputs at SUM output and carry bit at CARRY output.We can verify the output using Circuit Waveforms. This complete design and implementation is done using VLSI technology which has features such as high speed, low power, low cost, and small size.
 
 ### 2. INSTALLATION OF TOOLS
 ***
@@ -74,127 +74,190 @@ To Run the ckt using ngspice:
 
 ### 3. CIRCUIT DESIGN
 ***
-Multiplexer (MUX) is a data selector which will send single input data at the output based on select line input. Here we have implemented a 2:1 MUX which has 2 inputs (A and B), 1 output (Y) and 1 select line (S). Output Y will be A or B based on 0 or 1 input at the select line (S). If the select line is “0” output Y will be A and if the select line is “1” then output Y will be B. 2:1 MUX using CMOS will be designed using 2 parts: PMOS (pull-up lattice) and NMOS (pull-down lattice). PMOS circuit is connected to supply voltage VDD and NMOS circuit is connected to ground GND. The equation for output Y will be Y=ASbar + BS. According to circuit design rules, ASbar and BS will be connected in parallel in PMOS lattice and it will be connected in series in NMOS lattice. We know that the output of CMOS is always inverted so we have to connect the CMOS inverter circuit at the output. We will implement this circuit design using sky130nm technology. In the Circuit Waveform, we will verify the above implementation using clock pulse. Output Y will have the same clock pulse sequence as A when S will be “0” and it will have the same clock pulse sequence as B when S will be “1”.
+Full Adder is a digital circuit which will add 3 binary inputs and will give 2 outputs namely SUM and CARRY. The 3 inputs are A, B and C and outputs are SUM and CARRY. As we have 3 inputs we will have 8 input combinations.Using circuit design rules of CMOS we will design the circuit in such a way that addition of 3 inputs will occur at SUM output and carry bit will occur at CARRY output. While designing we have used total 28 Transistors. Full Adder using CMOS will be designed using 2 parts: PMOS (pull-up lattice) and NMOS (pull-down lattice). PMOS circuit is connected to supply voltage VDD and NMOS circuit is connected to ground GND. We will implement this circuit design using sky130nm technology. In the Circuit Waveform, we will verify the above implementation using clock pulse. In the output we will give different input combinations through clock pulse and verify the logic using output waveform.  
 
 #### 3.1 REFERENCE CIRCUIT DIAGRAM
-   ![Circuit Diagram](https://user-images.githubusercontent.com/70748543/152833395-2d779dae-919e-42cd-81ac-cc3ae9fc8605.jpeg)
+  ![REFERENCE CIRCUIT DIAGRAM](https://user-images.githubusercontent.com/70748543/152938593-034524ca-efd2-4550-96eb-f239ebc2a60a.jpeg)
 
 
 #### 3.2 REFERENCE CIRCUIT WAVEFORM
-  ![WAVEFORM](https://user-images.githubusercontent.com/70748543/152833636-cecae839-963c-4a8b-b394-7ff5b986865a.jpeg)
+  ![REFERENCE CIRCUIT WAVEFORM](https://user-images.githubusercontent.com/70748543/152938719-4420d2a2-4b09-42e3-ac8e-5bccb35bf5a2.jpeg)
   
 
 ### 4. IMPLEMENTATION
 ***
 Now, we will design the complete circuit using our reference circuit diagram with PMOS logic above and NMOS logic below.
 After connecting the complete we will get a circuit like below:
-![Final_Circuit_Diagram](https://user-images.githubusercontent.com/70748543/152843684-22f57b96-daed-460d-8f5f-b8d0b6491dd8.JPG)
+![Final_Circuit_Diagram](https://user-images.githubusercontent.com/70748543/152938780-5d35f5c6-ad03-450e-9fd5-9a3d242ffc69.JPG)
 
 
 Label each and every component and port and check electrical rule checking and generate netlist file using spice and make changes in netlist to add sky130 models.
 **The netlist generated initially is as shown below:**
 
-\* C:\SPB\_Data\eSim-Workspace\Multiplexer\multiplexer.cir
+* C:\SPB_Data\eSim-Workspace\Full_Adder\abc.cir
 
-\* EESchema Netlist Version 1.1 (Spice format) creation date: 2/7/2022 9:25:01 PM
+* EESchema Netlist Version 1.1 (Spice format) creation date: 2/8/2022 1:04:47 PM
 
-\* To exclude a component from the Spice Netlist add [Spice\_Netlist\_Enabled] user FIELD set to: N
+* To exclude a component from the Spice Netlist add [Spice_Netlist_Enabled] user FIELD set to: N
+* To reorder the component spice node sequence add [Spice_Node_Sequence] user FIELD and define sequence: 2,1,0
 
-\* To reorder the component spice node sequence add [Spice\_Node\_Sequence] user FIELD and define sequence: 2,1,0
+* Sheet Name: /
+M1  /vdd /vin_a Net-_M1-Pad3_ /vdd mosfet_p		
 
-\* Sheet Name: /
+M2  /vdd /vin_a Net-_M2-Pad3_ /vdd mosfet_p		
 
-M2  Net-\_M2-Pad1\_ /vin\_1 /vdd /vdd mosfet\_p		
+M3  /vdd /vin_b Net-_M2-Pad3_ /vdd mosfet_p		
 
-M3  Net-\_M2-Pad1\_ Net-\_M1-Pad1\_ /vdd /vdd mosfet\_p		
+M4  /vdd /vin_c Net-_M4-Pad3_ /vdd mosfet_p		
 
-M4  Net-\_M2-Pad1\_ /vin\_2 Net-\_M12-Pad2\_ /vdd mosfet\_p		
+M5  /vdd /vin_a Net-_M4-Pad3_ /vdd mosfet_p		
 
-M5  Net-\_M2-Pad1\_ /select Net-\_M12-Pad2\_ /vdd mosfet\_p		
+M6  /vdd /vin_b Net-_M4-Pad3_ /vdd mosfet_p		
 
-M8  Net-\_M12-Pad2\_ /vin\_1 Net-\_M10-Pad1\_ GND mosfet\_n		
+M7  Net-_M1-Pad3_ /vin_b Net-_M14-Pad2_ /vdd mosfet_p		
 
-M9  Net-\_M12-Pad2\_ /vin\_2 Net-\_M11-Pad1\_ GND mosfet\_n		
+M8  Net-_M2-Pad3_ /vin_c Net-_M14-Pad2_ /vdd mosfet_p		
 
-M10  Net-\_M10-Pad1\_ Net-\_M1-Pad1\_ GND GND mosfet\_n		
+M9  Net-_M4-Pad3_ Net-_M14-Pad2_ Net-_M12-Pad3_ /vdd mosfet_p		
 
-M11  Net-\_M11-Pad1\_ /select GND GND mosfet\_n		
+M10  /vdd /vin_a Net-_M10-Pad3_ /vdd mosfet_p		
 
-M1  Net-\_M1-Pad1\_ /select /vdd /vdd mosfet\_p		
+M11  Net-_M10-Pad3_ /vin_b Net-_M11-Pad3_ /vdd mosfet_p		
 
-M7  Net-\_M1-Pad1\_ /select GND GND mosfet\_n		
+M12  Net-_M11-Pad3_ /vin_c Net-_M12-Pad3_ /vdd mosfet_p		
 
-M6  /vout Net-\_M12-Pad2\_ /vdd /vdd mosfet\_p		
+M13  /vdd Net-_M12-Pad3_ /sum /vdd mosfet_p		
 
-M12  /vout Net-\_M12-Pad2\_ GND GND mosfet\_n		
+M28  /sum Net-_M12-Pad3_ GND GND mosfet_n		
 
-U1  /vdd /select /vin\_1 /vin\_2 /vout PORT		
+M21  Net-_M14-Pad2_ /vin_b Net-_M15-Pad1_ GND mosfet_n		
+
+M15  Net-_M15-Pad1_ /vin_a GND GND mosfet_n		
+
+M16  Net-_M16-Pad1_ /vin_a GND GND mosfet_n		
+
+M17  Net-_M16-Pad1_ /vin_a GND GND mosfet_n		
+
+M18  Net-_M18-Pad1_ /vin_c GND GND mosfet_n		
+
+M22  Net-_M14-Pad2_ /vin_c Net-_M16-Pad1_ GND mosfet_n		
+
+M19  Net-_M18-Pad1_ /vin_a GND GND mosfet_n		
+
+M23  Net-_M12-Pad3_ Net-_M14-Pad2_ Net-_M18-Pad1_ GND mosfet_n		
+
+M20  Net-_M18-Pad1_ /vin_b GND GND mosfet_n		
+
+M26  Net-_M12-Pad3_ /vin_c Net-_M25-Pad1_ GND mosfet_n		
+
+M25  Net-_M25-Pad1_ /vin_b Net-_M24-Pad1_ GND mosfet_n		
+
+M24  Net-_M24-Pad1_ /vin_a GND GND mosfet_n		
+
+M27  /carry Net-_M14-Pad2_ GND GND mosfet_n		
+
+M14  /vdd Net-_M14-Pad2_ /carry /vdd mosfet_p		
+
+U1  /vdd /vin_a /vin_b /vin_c /sum /carry PORT		
 
 .end
 
 **The netlist after making sky130 models syntax changes is as shown below:**
 
-\* c:\spb\_data\esim-workspace\multiplexer\multiplexer.cir
+* c:\spb_data\esim-workspace\full_adder\full_adder.cir
 
-.lib "sky130\_fd\_pr/models/sky130.lib.spice" tt
+.lib "sky130_fd_pr/models/sky130.lib.spice" tt
 
-xM1  Net-\_M1-Pad1\_ select vdd vdd sky130\_fd\_pr\_\_pfet\_01v8		
 
-xM7  Net-\_M1-Pad1\_ select GND GND sky130\_fd\_pr\_\_nfet\_01v8		
+xM1  vdd vin_a Net-_M1-Pad3_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
 
-xM6  vout Net-\_M12-Pad2\_ vdd vdd sky130\_fd\_pr\_\_pfet\_01v8		
+xM7  Net-_M1-Pad3_ vin_b Net-_M14-Pad2_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
 
-xM12  vout Net-\_M12-Pad2\_ GND GND sky130\_fd\_pr\_\_nfet\_01v8		
+xM2  vdd vin_a Net-_M2-Pad3_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
 
-xM2  Net-\_M2-Pad1\_ vin\_1 vdd vdd sky130\_fd\_pr\_\_pfet\_01v8		
+xM3  vdd vin_b Net-_M2-Pad3_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
 
-xM4  Net-\_M12-Pad2\_ vin\_2 Net-\_M2-Pad1\_ vdd sky130\_fd\_pr\_\_pfet\_01v8		
+xM8  Net-_M2-Pad3_ vin_c Net-_M14-Pad2_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
 
-xM3  Net-\_M2-Pad1\_ Net-\_M1-Pad1\_ vdd vdd sky130\_fd\_pr\_\_pfet\_01v8		
+xM4  vdd vin_c Net-_M4-Pad3_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
 
-xM5  Net-\_M12-Pad2\_ select Net-\_M2-Pad1\_ vdd sky130\_fd\_pr\_\_pfet\_01v8		
+xM5  vdd vin_a Net-_M4-Pad3_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
 
-xM8  Net-\_M12-Pad2\_ vin\_1 Net-\_M10-Pad1\_ GND sky130\_fd\_pr\_\_nfet\_01v8		
+xM6  vdd vin_b Net-_M4-Pad3_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
 
-xM10  Net-\_M10-Pad1\_ Net-\_M1-Pad1\_ GND GND sky130\_fd\_pr\_\_nfet\_01v8		
+xM9  Net-_M4-Pad3_ Net-_M14-Pad2_ Net-_M12-Pad3_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
 
-xM9  Net-\_M12-Pad2\_ vin\_2 Net-\_M11-Pad1\_ GND sky130\_fd\_pr\_\_nfet\_01v8		
+xM21  Net-_M14-Pad2_ vin_b Net-_M15-Pad1_ GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
 
-xM11  Net-\_M11-Pad1\_ select GND GND sky130\_fd\_pr\_\_nfet\_01v8	
+xM15  Net-_M15-Pad1_ vin_a GND GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
 
-Vdd vdd 0 3	
+xM22  Net-_M14-Pad2_ vin_c Net-_M16-Pad1_ GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
 
-Vin\_1 vin\_1 0 pulse(0 3 0s 0s 0s 5us 10us)
+xM16  Net-_M16-Pad1_ vin_a GND GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
 
-Vin\_2 vin\_2 0 pulse(0 3 0s 0s 0s 2.5us 5us) 
+xM17  Net-_M16-Pad1_ vin_b GND GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
 
-Vd0 select 0 pulse(3 0 0s 0s 0s 10us 20us) 
+xM23  Net-_M12-Pad3_ Net-_M14-Pad2_ Net-_M18-Pad1_ GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
 
-.tran 0.1us 40us
+xM18  Net-_M18-Pad1_ vin_c GND GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
+
+xM19  Net-_M18-Pad1_ vin_a GND GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
+
+xM20  Net-_M18-Pad1_ vin_b GND GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
+
+xM10  vdd vin_a Net-_M10-Pad3_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
+
+xM11  Net-_M10-Pad3_ vin_b Net-_M11-Pad3_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
+
+xM12  Net-_M11-Pad3_ vin_c Net-_M12-Pad3_ vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
+
+xM26  Net-_M12-Pad3_ vin_c Net-_M25-Pad1_ GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
+
+xM25  Net-_M25-Pad1_ vin_b Net-_M24-Pad1_ GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
+
+xM24  Net-_M24-Pad1_ vin_a GND GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
+
+xM13  vdd Net-_M12-Pad3_ sum vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5		
+
+xM28  sum Net-_M12-Pad3_ GND GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
+
+xM14  vdd Net-_M14-Pad2_ carry vdd sky130_fd_pr__pfet_01v8 w=1 l=0.5			
+
+xM27  carry Net-_M14-Pad2_ GND GND sky130_fd_pr__nfet_01v8 w=0.42 l=0.5		
+
+Vdd vdd 0 3.3
+
+Vd0 vin_a 0 pulse(0 2.2 0us 0s 0s 20us 40us)
+
+Vd1 vin_b 0 pulse(0 2.2 5us 0s 0s 20us 40us)
+
+Vd2 vin_c 0 pulse(0 2.2 15us 0s 0s 20us 40us)
+
+.tran 0.1us 60us
 
 .control
 
 run
 
-plot  V(select) +  5 V(vin\_2) + 10 V(vin\_1) + 15 V(vout) 
+plot V(carry) V(sum) +4 V(vin_c) +8  V(vin_b) +12 V(vin_a)+15
 
 .endc
 
 .end
 
-
 **Note**: sky130\_fr\_pd file for sky130 model must be present on the same file as .cir.out.
 
 **Truth Table for 2:1 mux using CMOS is as shown below**:
 
-![TRUTH TABLE](https://user-images.githubusercontent.com/70748543/152843883-17ad3869-bf8c-4f6b-9e43-decdc8881021.jpeg)
+![TRUTH TABLE](https://user-images.githubusercontent.com/70748543/152938910-755d5a2e-acea-48ff-bd91-b33b99528575.jpeg)
 
 Now, run the .cir.out file using ngspice and we will get the circuit waveforms as follows:
+![Final_Circuit_Waveform](https://user-images.githubusercontent.com/70748543/152938841-1d850fcf-14c9-4f08-96b1-8ddc50119328.JPG)
 
-From the above waveform we can verify the truth table for 2:1 mux using CMOS. 
+From the above waveform we can verify the truth table for Full Adder using CMOS. 
 
 ### 5. REFERENCES:
 ***
-[1] D. S. D. R. A. Rose V Anugraha. Design and performance analysis of 2:1 multiplexer using multiple logic families at 180nmtechnology.https://ieeexplore.ieee.org/abstract/document/8256918. 
+[1]N. Zhuang and H. Wu, "A new design of the CMOS full adder," IEEE Journal of Solid-State Circuits, vol. 27, No. 5, pp. 840-844, May 1992.
 
-[2] S. J. Anjum Aara. Design and implementation of cmos and cnt based 2:1 multiplexer at 32nm technology. www.irjet.net.
+[2]N. H. E. Weste and K. Eshraghian, "Principles of CMOS VLSI design," Addison Wesley, 1993.
