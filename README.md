@@ -245,7 +245,7 @@ plot V(carry) V(sum) +4 V(vin_c) +8  V(vin_b) +12 V(vin_a)+15
 
 **Note**: sky130\_fr\_pd file for sky130 model must be present on the same file as .cir.out.
 
-**Truth Table for 2:1 mux using CMOS is as shown below**:
+**Truth Table for Full Adder using CMOS is as shown below**:
 
 ![TRUTH TABLE](https://user-images.githubusercontent.com/70748543/153016747-748084fa-245e-4885-a1bd-6e74ccbbd64d.JPG)
 
